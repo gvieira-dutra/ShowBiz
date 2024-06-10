@@ -1,0 +1,103 @@
+﻿@model GVD2247A5.Models.EpisodeWithShowNameViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.Name</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ShowName)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ShowName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SeasonNumber)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SeasonNumber)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EpisodeNumber)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EpisodeNumber)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AirDate)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AirDate)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+
+        <dd class="col-sm-10">
+            <img src="@Model.ImageUrl" style="max-height:150px; max-width:150px" />
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Clerk)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Clerk)
+        </dd>
+
+        @if (!string.IsNullOrEmpty(Model.Premise))
+        {
+            <hr />
+            <dt>@Html.DisplayNameFor(model => model.Premise)</dt>
+
+            <dd class="well"> @Html.Raw(Model.Premise)</dd>
+        }
+
+            @if (Model.VideoContentType != null)
+            {
+
+            <hr />
+
+            <dt>
+                @Html.DisplayNameFor(model => model.VideoUpload)
+            </dt>
+            <dd>
+
+                <video controls src="/Episodes/Video/@Model.Id" alt="@Model.Name"></video>
+            </dd>
+
+        }
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

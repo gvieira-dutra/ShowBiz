@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title - Show Biz II</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="@Url.Content("https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js")"></script>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @{
+        var userAccount = new GVD2247A5.Controllers.RequestUser(User as System.Security.Claims.ClaimsPrincipal);
+    }
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("Show Biz II", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Genres", "Index", "Genre", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Actors", "Index", "Actor", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Shows", "Index", "Show", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Episodes", "Index", "Episode", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    <li class="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Load data <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+
+                            <li><a class="dropdown-item" href="LoadData/Roles">Roles</a></li>
+                            @using System.Security.Claims;
+                            @if ((User as ClaimsPrincipal).HasClaim(ClaimTypes.Role, "Administrator"))
+                            {
+                                <li><a class="dropdown-item" href="LoadData/Genres">Genres</a></li>
+                                <li><a class="dropdown-item" href="LoadData/Actors">Actors</a></li>
+                                <li><a class="dropdown-item" href="LoadData/Shows">Shows</a></li>
+                                <li><a class="dropdown-item" href="LoadData/Episodes">Episodes</a></li>
+                                <li><a class="dropdown-item" href="LoadData/Remove">Remove</a></li>
+                                <li><a class="dropdown-item" href="LoadData/RemoveDatabase">REMOVE DATABASE</a></li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+             
+
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </nav>
+   
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>
+                <small>
+                    By submitting this assignment you agree to the following:
+                    I declare that this assignment is my own work in accordance with the Seneca Academic
+                    Policy. No part of this assignment has been copied manually or electronically from
+                    any other source (including web sites) or distributed to other students.
+                </small>
+            </p>
+            <p>&copy; Gleison Vieira Dutra, gvieira-dutra@myseneca.ca, WEB524, Winter 2024</p>
+
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

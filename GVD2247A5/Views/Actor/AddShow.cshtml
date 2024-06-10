@@ -1,0 +1,119 @@
+﻿@model GVD2247A5.Models.ShowAddFormViewModel
+
+@{
+    ViewBag.Title = "AddShow";
+}
+
+<h2>Adding Show For @Model.ActorName</h2>
+
+<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+<script src="@Url.Content("https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js")"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <dl class="dl-horizontal">
+
+            <dt>
+
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-form-label " })
+            </dt>
+            <dd>
+
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", autofocus = true } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.LabelFor(model => model.ReleaseDate, htmlAttributes: new { @class = "col-form-label " })
+            </dt>
+            <dd>
+                @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "text-danger" })
+            </dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.LabelFor(model => model.ImageUrl, htmlAttributes: new { @class = "col-form-label " })
+            </dt>
+            <dd>
+                @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+            </dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.LabelFor(model => model.Genre, htmlAttributes: new { @class = "col-form-label " })
+            </dt>
+            <dd>
+
+                @Html.DropDownList("GenreId", Model.GenreList, htmlAttributes: new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(model => model.Genre, "", new { @class = "text-danger" })
+            </dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.LabelFor(model => model.ActorList, htmlAttributes: new { @class = "col-form-label " })
+            </dt>
+            <dd class="well">
+                @foreach (var actor in Model.ActorList)
+                {
+                    <div>
+                        <label>
+                            <input type="checkbox"
+                                   name="ActorIdList"
+                                   value="@actor.Value"
+                                   @(Model.ActorId == int.Parse(actor.Value) ? "checked" : "") />
+
+                            &nbsp;@actor.Text
+                        </label>
+                    </div>
+                }
+                @Html.ValidationMessageFor(model => model.ActorName, "", new { @class = "text-danger" })
+            </dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.LabelFor(model => model.Premise, htmlAttributes: new { @class = "control-label " })
+            </dt>
+            <dd>
+                @Html.EditorFor(model => model.Premise, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
+                @Html.ValidationMessageFor(model => model.Premise, "", new { @class = "text-danger" })
+            </dd>
+        </dl>
+
+        <script>CKEDITOR.replace('Premise');</script>
+        <style>
+            .cke_bottom {
+                display: none !important;
+            }
+        </style>
+
+
+        <dl class="dl-horizontal">
+            <dd>
+                <input type="submit" value="Create" class="btn btn-outline-dark" />
+            </dd>
+        </dl>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

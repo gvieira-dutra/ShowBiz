@@ -1,0 +1,56 @@
+﻿@model GVD2247A5.Models.ActorMediaItemAddFormViewModel
+
+@{
+    ViewBag.Title = "AddMediaItem";
+}
+
+<h2>Add Media Item for @Model.ActorName</h2>
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <hr />
+    @Html.HiddenFor(model => model.ActorId)
+
+    <dl class="dl-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <dt class="col-sm-2">
+            @Html.LabelFor(model => model.Caption, htmlAttributes: new { @class = "col-form-label" })
+        </dt>
+        <dd>
+            @Html.EditorFor(model => model.Caption, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Caption, "", new { @class = "text-danger" })
+        </dd>
+    </dl>
+
+
+    <dl class="dl-horizontal">
+
+        <dt class="col-sm-2">
+            @Html.LabelFor(model => model.ContentUpload, htmlAttributes: new { @class = "control-label " })
+
+        </dt>
+        <dd>
+            @Html.EditorFor(model => model.ContentUpload, new { htmlAttributes = new { @class = "form-control " } })
+            @Html.ValidationMessageFor(model => model.ContentUpload, "", new { @class = "text-danger" })
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dd>
+            <input type="submit" value="Create" class="btn btn-outline-dark" />
+        </dd>
+    </dl>
+
+}
+
+<div>
+    @Html.ActionLink("Back to Actor Details", "Details", new { id = Model.ActorId })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

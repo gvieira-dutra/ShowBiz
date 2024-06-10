@@ -1,0 +1,109 @@
+﻿@model GVD2247A5.Models.ActorAddViewModel
+
+@{
+    ViewBag.Title = "Create Actor";
+}
+
+<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+
+
+<h2>Create Actor</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div>
+
+    <hr />
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-form-label  " })
+        </dt>
+        <dd>
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", autofocus = true } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </dd>
+    </dl>
+
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.LabelFor(model => model.AlternateName, htmlAttributes: new { @class = "col-form-label " })
+        </dt>
+        <dd>
+            @Html.EditorFor(model => model.AlternateName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.AlternateName, "", new { @class = "text-danger" })
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @class = "col-form-label" })
+        </dt>
+        <dd>
+            @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control", type = "date", @Value = DateTime.Today.AddYears(-45).ToString("yyyy-MM-dd") } })
+            @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+            @*I left the date as 45 years ago because I assumed it could be the average age for famous actors*@
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.LabelFor(model => model.Height, htmlAttributes: new { @class = "col-form-label" })
+        </dt>
+        <dd>
+            @Html.EditorFor(model => model.Height, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Height, "", new { @class = "text-danger" })
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.LabelFor(model => model.ImageUrl, htmlAttributes: new { @class = "col-form-label" })
+        </dt>
+        <dd>
+            @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.LabelFor(model => model.Biography, htmlAttributes: new { @class = "control-label " })
+        </dt>
+        <dd>
+            @Html.EditorFor(model => model.Biography, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
+            @Html.ValidationMessageFor(model => model.Biography, "", new { @class = "text-danger" })
+        </dd>
+    </dl>
+
+    <script>CKEDITOR.replace('Biography');</script>
+    <style>
+        .cke_bottom {
+            display: none !important;
+        }
+    </style>
+
+
+
+
+    <dl class="dl-horizontal">
+        <dd>
+            <input type="submit" value="Create" class="btn btn-outline-dark" />
+        </dd>
+    </dl>
+
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

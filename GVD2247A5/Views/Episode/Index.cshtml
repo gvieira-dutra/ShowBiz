@@ -1,0 +1,78 @@
+﻿@model IEnumerable<GVD2247A5.Models.EpisodeWithShowNameViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Episode List</h2>
+
+@*@using System.Security.Claims
+@if ((User as ClaimsPrincipal).HasClaim(ClaimTypes.Role, "Executive"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    }*@
+<hr />
+@if(Model.Count() > 0) { 
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeasonNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EpisodeNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clerk)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                    <br />
+                <i>  @Html.DisplayFor(modelItem => item.ShowName)</i>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeasonNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EpisodeNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AirDate)
+                </td>
+                <td>
+                    <img src="@item.ImageUrl" alt="@item.ShowName" style=" max-width: 100px; max-height: 100px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clerk)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) 
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else { <p>There are no episodes yet </p>}

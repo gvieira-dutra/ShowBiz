@@ -1,0 +1,135 @@
+﻿@model GVD2247A5.Models.ShowWithInfoViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.Name</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+
+        <dd class="col-sm-10">
+            <img src="@Model.ImageUrl" alt="@Model.Name" style="max-width:150px; max-height:150px" />
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Coordinator)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Coordinator)
+        </dd>
+   
+        
+
+            @if (Model.Actors.Count() > 0)
+            {
+
+                <hr />
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Actors)
+
+                    <br />
+                    <span class="badge rounded-pill bg-secondary">
+                        @Model.Actors.Count() actor@(Model.Actors.Count() > 1 ? "s" : "")
+                       
+                    </span>
+                </dt>
+
+                <dd class="col-sm-10">
+                    @foreach (var cast in Model.Actors)
+                    {
+                        <span>
+                            @(cast.AlternateName != null ? cast.AlternateName : cast.Name)
+                            <br />
+                        </span>
+                    }
+                </dd>
+            }
+                @if (Model.Actors.Count() == 1){<br />}
+        
+
+        @if (Model.Episodes.Count() > 0)
+        {           
+        <hr />
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Episodes)
+
+                <br />
+                <span class="badge rounded-pill bg-secondary">
+                    @Model.Episodes.Count() episode@(Model.Episodes.Count() > 1 ? "s" : "")
+                </span>
+            </dt>
+
+            <dd class="col-sm-10">
+                @foreach (var ep in Model.Episodes)
+                {
+                    <span>
+                        @ep.Name
+                        <br />
+                    </span>
+                }
+            </dd>
+        }
+
+        @if(!string.IsNullOrEmpty(Model.Premise))
+            {
+                <hr />
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Premise)
+                </dt>
+                <dd class="well">
+                    @Html.Raw(Model.Premise)
+                </dd>
+            }
+    </dl>
+
+
+</div>
+
+@using System.Security.Claims;
+@if ((User as ClaimsPrincipal).HasClaim(ClaimTypes.Role, "Clerk"))
+{
+    <p>
+    @Html.ActionLink("Add New Episode", "EpisodeAddNew", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+else
+{
+@Html.ActionLink("Back to List", "Index")
+
+}
+
