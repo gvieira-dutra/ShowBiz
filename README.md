@@ -2,6 +2,8 @@
 
 ## Overview
 The Show Biz System is an application designed to manage various aspects of the entertainment industry, including actors, shows, and episodes. It aims to streamline the management and organization of information related to these entities, providing a robust platform for industry professionals.
+[Check out the application here](https://gvieira-dutra-wa-web524-a6.azurewebsites.net/)
+
 
 ## Goals
 - **Actor Management**: Keep detailed records of actors, their profiles, and their involvement in shows and episodes.
